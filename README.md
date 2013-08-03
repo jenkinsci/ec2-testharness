@@ -2,3 +2,64 @@ jenkins-ec2-testharness
 =======================
 
 Test harness for jenkins ec2 plugin
+
+Concepts
+========
+
+Provides a new cloud type called "AmazonEC2CloudTester".  This drives an 
+AmazonEC2Cloud instance, passing it a mock AmazonEC2 class instance.  
+The virtual EC2 slaves created can run on a designated 
+host that you provide, so that jobs can be run on them.
+
+How to run
+==========
+
+It's tested on linux Ubuntu 12.04 64-bit. It will probably work on most linuxes.
+It probably won't work on Windows without some tweaking at this stage.
+
+You will need:
+
+- a machine to run jenkins
+- you can use the same machine to run the EC2 virtual slaves, or use a different machine,
+but testing was done using the same machine for both the slaves and the master, so that's more likely to work ok
+
+Installation:
+
+- you need a slightly tweaked version of the ec2 plugin, which you can get from https://github.com/hughperkins/ec2-plugin , and you need the ec2 harness plugin itself of course,
+from https://github.com/hughperkins/jenkins-ec2-testharness
+- for each one, git clone it, then do 'mvn -DskipTests install' to compile and package it,
+then do 'mvn hpi:hpl -DhudsonHome=/your/jenkins/home/directory/here' to put a link from 
+the jenkins plugins directory to your project directories
+
+Procedure:
+
+First, lets set up the new mock cloud:
+- Install both the ec2 and ec2-testharness plugins
+- start Jenkins
+- go to the 'configure' page.
+- Add new cloud -> 'AmazonEC2CloudTester'
+- anything you like in access key id and secret access key
+- Put a valid private key in the 'EC2 Key Pair's Private Key' field.  The public 
+key for this key should be in ~/.ssh/authorized_keys
+- Next to 'AMIs', click 'Add'
+- put 'localhost' for 'hostname for EC2 slave simulator' (or you can put the name of a different machine if you want, but I haven't tested this, so there might be some niggles)
+- anything you like in ami id and availability zone
+- put a valid empty directory in 'remote fs root', with modify rights to the user you're going to specify in 'remote user'
+- put a valid user name in 'remote user'.  This user should have the private key from earlier in .ssh/authorized_keys; and should have change access to the remote fs root directory
+- I tested by putting a label in labels, eg 'mockec2', and I put 'leave this machine for tied jobs only'
+- change the ssh port if you need (it is taken into account)
+- click 'save'
+
+Now, let's create a job to trigger the creation of a new EC2 mock instance:
+- go to the main jenkins page
+- click 'New Job'
+- put something for the title, and select 'build a free-style software project'
+- click 'ok'
+- make sure 'restrict where this project can be run' is ticked, and put the label from 
+earlier, eg 'mockec2'
+- click 'add build step', 'execute shell'
+- put a couple of commands, eg 'pwd', 'whoami', 'echo this is a mock slave'
+- click 'save'
+- click 'build now'
+- hopefully, within 20 seconds, it will start building, on the new virtual EC2 instance, which has now already started
+

@@ -1,0 +1,11 @@
+<!--
+  This view is used to render the installed plugins page.
+-->
+<div>
+Provides a test harness for the EC2 plugin.  Provides a new cloud type 
+called 'AmazonEC2CloudTester', which drives the AmazonEC2Cloud cloud, but
+using a dummy ('mock') EC2 cloud.  The virtual slaves created can actually
+run jobs.  The virtual slaves run on a host of your choosing, which you
+specify through the 'hostname for EC2 slave simulator' parameter, on the 
+'configure' page.
+</div>

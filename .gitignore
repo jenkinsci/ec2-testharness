@@ -4,3 +4,10 @@
 *.jar
 *.war
 *.ear
+/.apt_generated
+target/eclipse-classes/
+.settings/
+.project
+.factorypath
+.classpath
+
