@@ -7,11 +7,11 @@
   </parent>
 
   <groupId>org.jenkins-ci.plugins</groupId>
-  <artifactId>ec2-harness</artifactId>
+  <artifactId>ec2-testharness</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Test harness for Amazon EC2 plugin</name>
   <packaging>hpi</packaging>
-  <url>https://github.com/hughperkins/jenkins-ec2-testharness</url>
+  <url>https://github.com/jenkinsci/ec2-testharness.git</url>
   <licenses>
     <license>
       <name>The MIT License</name>
@@ -28,8 +28,8 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/hughperkins/jenkins-ec2-testharness.git</connection>
-    <developerConnection>scm:git:git@github.com:hughperkins/jenkins-ec2-testharness</developerConnection>
+    <connection>scm:git:git://github.com/jenkinsci/ec2-testharness.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/ec2-testharness</developerConnection>
   </scm>
 
   <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
