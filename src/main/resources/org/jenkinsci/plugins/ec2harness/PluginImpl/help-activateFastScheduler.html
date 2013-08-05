@@ -1,0 +1,4 @@
+<div>Activating this will make builds and slave provisioning start sooner.</div><br /><div>Details: it does this by
+changing LoadStatistics.CLOCK from 10 seconds to 5 seconds, and changing NodeProvisionerInvoker.INITIALDELAY
+from 10 * CLOCK to 1 * CLOCK.</div><br /><div>Usage caveat: don't activate this on a production server, or on any server
+with live (not mock) clouds configured.</div>

@@ -21,7 +21,7 @@ public class PluginImpl extends Plugin implements Describable<PluginImpl> {
 		getDescriptor().load();
 		if( getDescriptor().activateFastScheduler ) {
 			System.out.println( this.getClass().getCanonicalName() + " Changing Clock and NodeProvisioner delays, to improve testing speed");
-			LoadStatistics.CLOCK = 4 * 1000;
+			LoadStatistics.CLOCK = 5 * 1000;
 			NodeProvisionerInvoker.INITIALDELAY = LoadStatistics.CLOCK * 1;
 			NodeProvisionerInvoker.RECURRENCEPERIOD = LoadStatistics.CLOCK * 1;
 		} else {
