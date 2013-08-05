@@ -10,4 +10,5 @@ target/eclipse-classes/
 .project
 .factorypath
 .classpath
+target/classes/
 
